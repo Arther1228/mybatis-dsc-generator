@@ -10,5 +10,5 @@
 	<sql id="Base_Column_List">
 		${agile}
 	</sql>
-	
+
 </mapper>

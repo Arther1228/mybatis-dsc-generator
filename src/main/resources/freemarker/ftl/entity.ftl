@@ -9,6 +9,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 <#if isSwagger=="true" >
 import io.swagger.annotations.ApiModelProperty;
 </#if>
@@ -16,6 +19,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+import lombok.AllArgsConstructor;
 import java.io.Serializable;
 <#list pkgs as ps>
 	<#if ps??>
@@ -32,8 +36,10 @@ import ${ps};
  * 
  */
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@ApiModel(value = "${entityComment}", description = "${entityComment}")
 public class ${entityName} extends Model<${entityName}> {
 
 	private static final long serialVersionUID = ${agile}L;
@@ -52,10 +58,19 @@ public class ${entityName} extends Model<${entityName}> {
   </#if>
  </#if>
  <#if ci.property=="id">
-	@TableId(value = "id", type = IdType.AUTO)
+	@TableId(value = "id", type = IdType.INPUT)
+    @TableField(fill = FieldFill.INSERT)
  </#if>
+<#if ci.property=="addTime">
+    @TableField(fill = FieldFill.INSERT)
+</#if>
+
  <#if isSwagger=="true" >
-	@ApiModelProperty(name = "${ci.property}" , value = "${ci.comment}")
+     <#if ci.property=="id" || ci.property=="addTime">
+         @ApiModelProperty(name = "${ci.property}", value = "${ci.comment}", hidden = true)
+    <#else>
+        @ApiModelProperty(name = "${ci.property}", value = "${ci.comment}")
+     </#if>
  </#if>
 	private ${ci.javaType} ${ci.property};
     
