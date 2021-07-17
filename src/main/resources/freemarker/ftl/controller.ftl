@@ -37,8 +37,8 @@ public class ${entityName}Controller extends AbstractController<${entityName}Ser
 
 @PostMapping("/crk")
 @ApiOperation(value = "添加", notes = "作者：suncreate")
-public JsonResult<${entityName}> insert(@RequestBody @ApiParam(name = "${entityComment}", value = "传入json格式", required = true) ${entityName} entity) {
- JsonResult<${entityName}> result = new JsonResult<${entityName}>();
+public JsonResult insert(@RequestBody @ApiParam(name = "${entityComment}", value = "传入json格式", required = true) ${entityName} entity) {
+ JsonResult result = new JsonResult();
    if (null != entity) {
    boolean rsg = baseService.save(entity);
    if (rsg) {
