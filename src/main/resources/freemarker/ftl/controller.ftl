@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.suncreate.bigdata.util.JsonResult;
+import com.suncreate.bigdata.utils.JsonResult;
 import io.swagger.annotations.ApiParam;
 <#if isSwagger=="true" >
 import io.swagger.annotations.Api;
